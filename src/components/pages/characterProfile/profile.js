@@ -20,9 +20,8 @@ class ProfileAPI extends React.Component {
             films: [],
         }
     }
-    componentDidMount() {
-        let name = this.props.match.params.name
-        this.props.getProfileThunk(name)
+    getData = async () => {
+        await this.props.getProfileThunk(this.props.match.params.name)
         if(this.props.profile){
             var th = this;
             if(this.props.profile.homeworld){
@@ -35,7 +34,7 @@ class ProfileAPI extends React.Component {
                     })
             }
             if(this.props.profile.vehicles && this.props.profile.vehicles.length > 0){
-                this.props.profile.vehicles.map(vehicle => axios.get(vehicle)
+                const vehicles = this.props.profile.vehicles.map(vehicle => axios.get(vehicle)
                     .then(function (result) {
                         const newItem = result.data
                         th.setState({
@@ -47,7 +46,7 @@ class ProfileAPI extends React.Component {
                     }))
             }
             if(this.props.profile.films){
-                this.props.profile.films.map(film  => axios.get(film)
+                const films = this.props.profile.films.map(film  => axios.get(film)
                     .then(function(result) {
                         const newItem = result.data
                         th.setState({
@@ -59,6 +58,9 @@ class ProfileAPI extends React.Component {
                     }))
             }
         }
+    }
+    componentDidMount() {
+        this.getData()
     }
 
 

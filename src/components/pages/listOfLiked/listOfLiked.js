@@ -11,7 +11,7 @@ class ListOfLiked extends React.Component {
         return (
             <div>
                 {this.props.liked.length>0 ?
-                    this.props.liked.map(item => <p><NavLink key={item.name} to={item.name}>{item.name}</NavLink></p>)
+                    this.props.liked.map(item => <p key={item.name}><NavLink to={item.name}>{item.name}</NavLink></p>)
                     : 'There are no liked characters yet'}
             </div>
         );
